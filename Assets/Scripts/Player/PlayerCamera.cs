@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerCamera : MonoBehaviour {
     
-    public Transform m_orientation;
+    public Transform m_player;
+    public Transform m_camera;
     
     public float m_sensitivityX;
     public float m_sensitivityY;
@@ -29,8 +31,10 @@ public class PlayerCamera : MonoBehaviour {
         // (this will avoid doing a "loop")
         m_rotationX = Mathf.Clamp(m_rotationX, -90f, 90f);
         
-        // set this object transform (camera) and the orientation transform rotation (player)
+        // set this transform rotation (camera) and the orientation transform rotation (player)
         transform.rotation = Quaternion.Euler(m_rotationX, m_rotationY, 0);
-        m_orientation.rotation = Quaternion.Euler(0, m_rotationY, 0);
+        m_player.rotation = Quaternion.Euler(0, m_rotationY, 0);
+        
+        m_camera.position = transform.position;
     }
 }
